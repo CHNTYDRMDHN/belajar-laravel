@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class KelasController extends Controller
+class kelasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +14,10 @@ class KelasController extends Controller
      */
     public function index()
     {
-        //
-        return view('class.index');
+        //untuk mengambil data
+        $dataKelas = DB::table('kelas')->get();
+        // statement diatas sama dengan SELECT * FROM siswa
+        return view('class.index', compact('dataKelas'));
     }
 
     /**
@@ -37,19 +40,20 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
-            'Id' => 'required',
-            'nama_Kelas' => 'required',
-            'Jurusan' => 'required',
-        ]);
-        $query =DB::table('kelas')->insert([
-            "Id" => $request["Id"],
-            "nama_Kelas" => $request["nama_Kelas"],
-            "Jurusan" => $request["Jurusan"],
+        // $request->validate([
+        //     'id' => 'required',
+        //     'nama_kelas' => 'required',
+        //     'jurusan' => 'required',
+        // ]);
+        $query = DB::table('kelas')->insert([
+            "id" => $request["id"],
+            "namakelas" => $request["namakelas"],
+            "jurusan" => $request["jurusan"],
         ]);
 
         return redirect('/class');
     }
+    
 
     /**
      * Display the specified resource.
@@ -60,6 +64,9 @@ class KelasController extends Controller
     public function show($id)
     {
         //
+        $showKelasById = Db::table('kelas')->where('id', $id)->first();
+        //
+        return view('class.show', compact('showKelasById'));
     }
 
     /**
@@ -71,6 +78,9 @@ class KelasController extends Controller
     public function edit($id)
     {
         //
+        $showKelasById = Db::table('kelas')->where('id', $id)->first();
+        //
+        return view('class.edit', compact('showKelasById'));
     }
 
     /**
@@ -83,6 +93,20 @@ class KelasController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // $request->validate([
+        //     'nama_kelas' => 'required | unique:kelas',
+        //     'jurusan'    => 'required'
+        // ]);
+        $query = DB::table('siswa')
+            ->where('id', $id)
+            ->update([
+            'id'          => $request["id"],
+            'namakelas'  => $request["namakelas"],
+            'jurusan'     => $request["jurusan"],
+        ]);
+        return redirect('/class');
+    
+        
     }
 
     /**
@@ -94,5 +118,8 @@ class KelasController extends Controller
     public function destroy($id)
     {
         //
+        $query = DB::table('kelas')->where('id', $id)->delete();
+        return redirect('/class');
+    
     }
 }

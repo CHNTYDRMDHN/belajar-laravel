@@ -1,7 +1,7 @@
 @extends('template.master')
 
-@section ('judul')
-<h1> Manajemen Siswa</h1>
+@section('judul')
+    <h1>Manajemen Siswa</h1>
 @endsection
 
 @section ('content')
@@ -11,23 +11,22 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-
               <form action="/student" method="POST">
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="inputNIS">Nomor Indux Siswa</label>
-                    <input type="text" name="nis" class="form-control" id="inputNIS" placeholder="Enter Nomor Indux Siswa">
+                    <label for="inputNIS">Nomor Induk Siswa</label>
+                    <input type="text" name="nomor_induk_siswa" class="form-control" id="inputnis" placeholder="Enter Nomor Induk Siswa">
                   </div>
 
                   <div class="form-group">
                     <label for="inputNama">Nama Siswa</label>
-                    <input type="text" name="nama" class="form-control" id="inputNIS" placeholder="Enter Nama Siswa">
+                    <input type="text" name="nama" class="form-control" id="inputnama" placeholder="Enter Nama Siswa">
                   </div>
 
                   <div class="form-group">
                     <label for="inputAlamat">Alamat</label>
-                    <input type="text" name="alamat" class="form-control" id="inputNIS" placeholder="Enter Alamat">
+                    <input type="text" name="alamat" class="form-control" id="inputalamat" placeholder="Enter Alamat">
                   </div>
 
                   <div class="form-group">
